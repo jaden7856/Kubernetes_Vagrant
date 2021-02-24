@@ -1,0 +1,19 @@
+#!/bin/bash     <-- bash shell을 이용하여 명령어를 실행
+
+# CONTENTS_SOURCE_URL 환경변수가 설정되어 있는지 확인
+# 없는 경우 error 종료
+if [ -z $CONTENTS_SOURCE_URL ]; then
+    exit 1
+fi
+
+# 있는 경우 git clone을 통해서 컨텐츠를 가져오기
+git clone $CONTENTS_SOURCE_URL /data
+
+# 이후부터는 60초 마다 Github에서 컨텐츠를 가져오기
+cd /data
+while true
+do
+    data
+    sleep 60
+    git pull
+done
