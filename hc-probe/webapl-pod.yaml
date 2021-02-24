@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapl
+spec:
+  containers:
+    - name: webapl
+      image: jhg7856/webapl:0.1
+      livenessProbe:
+        httpGet:
+          path: /healthz
+          port: 3000
+        initialDelaySeconds: 3
+        periodSeconds: 5
+      readinessProbe:
+        httpGet:
+          path: /read
+          port: 3000
+        initalDelaySeconds: 15
+        periodSeconds: 6
